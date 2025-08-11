@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 // --- DATA MODELS ---
 
+// Represents a single task or chore for the user to complete.
 class Quest {
   final String id;
   final String title;
@@ -20,6 +21,7 @@ class Quest {
   });
 }
 
+// Represents the user's evolving creature.
 class Creature {
   String name;
   int level;
