@@ -98,7 +98,7 @@ class CreatureProvider with ChangeNotifier {
 Future<void> main() async {
   // Ensure Flutter is ready.
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize Hive for Flutter web.
+  // Initialize Hive for Flutter.
   await Hive.initFlutter();
   
   runApp(
