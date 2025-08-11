@@ -34,7 +34,7 @@ late Box packChecks;
 late Box routineChecks;
 
 // ====== UTIL ======
-String newId(String prefix) => '$prefix_${DateTime.now().millisecondsSinceEpoch}';
+String newId(String prefix) => '$prefix${DateTime.now().millisecondsSinceEpoch}';
 int toEpoch(DateTime d) => d.millisecondsSinceEpoch;
 DateTime fromEpoch(int e) => DateTime.fromMillisecondsSinceEpoch(e);
 String ymd(DateTime d) =>
@@ -500,7 +500,7 @@ class _MorningChecklistScreenState extends State<MorningChecklistScreen> {
                 label: const Text('Add Trait'),
                 onPressed: () async {
                   final created = await _addTraitDialog(context);
-                  if (created != null) setState(() {});
+                  setState(() {});
                 },
               ),
               const SizedBox(width: 8),
