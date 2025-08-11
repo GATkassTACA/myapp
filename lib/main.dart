@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 // --- DATA MODELS ---
 
@@ -95,12 +94,7 @@ class CreatureProvider with ChangeNotifier {
 
 // --- MAIN APP ---
 
-Future<void> main() async {
-  // Ensure Flutter is ready.
-  WidgetsFlutterBinding.ensureInitialized();
-  // Initialize Hive for Flutter.
-  await Hive.initFlutter();
-  
+void main() {
   runApp(
     MultiProvider(
       providers: [
@@ -172,8 +166,8 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddQuestDialog(context),
-        child: const Icon(Icons.add),
         tooltip: 'Add Quest',
+        child: const Icon(Icons.add),
       ),
     );
   }
