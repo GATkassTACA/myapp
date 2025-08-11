@@ -21,7 +21,7 @@ Future<void> main() async {
   _seedOnce();
   _dailyResetIfNeeded();
 
-  runApp(const EvoQuestApp());
+  runApp(const MyApp());
 }
 
 // ====== HIVE BOXES ======
@@ -65,6 +65,20 @@ void _dailyResetIfNeeded() {
   settings.put('lastResetYMD', today);
 }
 
+// ====== APP ======
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'EvoQuest',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(useMaterial3: true).copyWith(colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF00E5FF), brightness: Brightness.dark), scaffoldBackgroundColor: const Color(0xFF0D0F12)),
+      home: const EvoQuestApp(),
+    );
+  }
+}
 // ====== APP ROOT ======
 class EvoQuestApp extends StatefulWidget {
   const EvoQuestApp({super.key});
@@ -499,7 +513,6 @@ class _MorningChecklistScreenState extends State<MorningChecklistScreen> {
                 icon: const Icon(Icons.add),
                 label: const Text('Add Trait'),
                 onPressed: () async {
-                  final created = await _addTraitDialog(context);
                   setState(() {});
                 },
               ),
@@ -518,34 +531,6 @@ class _MorningChecklistScreenState extends State<MorningChecklistScreen> {
     );
   }
 
-  Future<void> _addTraitDialog(BuildContext context) async {
-    final nameCtrl = TextEditingController();
-    int order = (routines.length) + 1;
-    return showDialog<void>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('New Trait'),
-        content: SizedBox(
-          width: 400,
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: 'Name')),
-          ]),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-          FilledButton(
-            onPressed: () {
-              if (nameCtrl.text.isEmpty) return;
-              final id = newId('rt');
-              routines.put(id, {'id': id, 'name': nameCtrl.text, 'icon': 'check', 'order': order});
-              Navigator.pop(ctx);
-            },
-            child: const Text('Save'),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 // ====== FOSSILS ======
